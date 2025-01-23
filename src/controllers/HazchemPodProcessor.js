@@ -64,6 +64,8 @@ export default class HazchemPodProcessor {
       // Delete the original image file
       await this.fileRepository.delete(_file.path, _file.name);
     }
+
+    await this.ftpClient.disconnect();
     console.timeEnd("hazchem-processing-time");
   }
 }

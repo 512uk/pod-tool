@@ -80,6 +80,7 @@ export default class PalletforcePodProcessor {
       await this.fileRepository.delete(_file.path, _file.name);
     }
 
+    await this.ftpClient.disconnect();
     console.timeEnd("palletforce-processing-time");
   }
 }
