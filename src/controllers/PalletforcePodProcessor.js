@@ -26,18 +26,21 @@ export default class PalletforcePodProcessor {
     console.log("Palletforce processing started...");
     console.time("palletforce-processing-time");
 
-    const files = await this.fileRepository.dir(inFolderPath);
+    let files = await this.fileRepository.dir(inFolderPath);
     const validExtensions = ["tiff", "tif"];
+
+    files = files.filter((file) =>
+      validExtensions.includes(file.split(".").pop().toLowerCase())
+    );
+
+    if (files.length === 0) {
+      console.log("No files to process");
+      return;
+    }
 
     await this.ftpClient.connect();
 
     for (const fileName of files) {
-      const ext = fileName.split(".").pop().toLowerCase();
-
-      if (!validExtensions.includes(ext)) {
-        continue;
-      }
-
       console.log("Processing file:", fileName);
 
       const fileContents = await this.fileRepository.read(

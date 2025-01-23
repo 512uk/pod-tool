@@ -1,26 +1,25 @@
-import fs from 'fs';
-import path from 'path';
-import FileRepositoryInterface from './FileRepositoryInterface.js';
+import { promises as fs } from "fs";
+import path from "path";
+import FileRepositoryInterface from "./FileRepositoryInterface.js";
 
 export default class FileRepository extends FileRepositoryInterface {
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 
-    async dir(directory) {
-        return await fs.readdirSync(directory);
-    }
+  async dir(directory) {
+    return await fs.readdir(directory);
+  }
 
-    async read(directory, file) {
-        return await fs.readFileSync(path.join(directory, file));
-    }
+  async read(directory, file) {
+    return await fs.readFile(path.join(directory, file));
+  }
 
-    async write(directory, file, data) {
-        return await fs.writeFileSync(path.join(directory, file), data);
-    }
+  async write(directory, file, data) {
+    return await fs.writeFile(path.join(directory, file), data);
+  }
 
-    async delete(directory, file) {
-        return await fs.unlinkSync(path.join(directory, file));
-    }
-
+  async delete(directory, file) {
+    return await fs.unlink(path.join(directory, file));
+  }
 }
