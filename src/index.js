@@ -52,3 +52,16 @@ try {
   console.error(error, error.message);
   process.exit(1);
 }
+
+/**
+ * Error Handling
+ * This is a global error handler that will catch any uncaught exceptions or unhandled rejections
+ */
+process.on("uncaughtException", (error) => {
+  console.error("Uncaught Exception", error);
+  process.exit(1);
+});
+process.on("unhandledRejection", (error) => {
+  console.error("Unhandled Rejection", error);
+  process.exit(1);
+});
