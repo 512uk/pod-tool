@@ -55,7 +55,7 @@ export default class PalletforcePodProcessor {
       const processingStrategy = new ProcessingStrategy({
         colour: "blackandwhite",
         format: "tiff",
-        compression: "lzw",
+        compression: "group4",
       });
 
       // Create a new File instance representing the processed image file
